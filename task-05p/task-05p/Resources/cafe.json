@@ -1,0 +1,23 @@
+[
+    {
+        "name" : "Millstone",
+        "rating" : 5.0,
+        "location" : "10A Claremont Avenue",
+        "suburb" : "Malvern",
+        "phone" : "0395090789"
+    },
+    {
+        "name" : "Higher Ground",
+        "rating" : 4.5,
+        "location" : "650 Little Bourke Street",
+        "suburb" : "CBD",
+        "phone" : "0388996219"
+    },
+    {
+        "name" : "Industry Beans",
+        "rating" : 3.9,
+        "location" : "3/62 Rose Street",
+        "suburb" : "Fitzroy",
+        "phone" : "0394171034"
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "name" : "Millstone",
+        "rating" : 4.5,
+        "location" : "10A Claremont Avenue",
+        "suburb" : "Malvern",
+        "phone" : "0395090789",
+        "special" : "Black & White"
+    },
+    {
+        "name" : "Higher Ground",
+        "rating" : 4.2,
+        "location" : "650 Little Bourke Street",
+        "suburb" : "CBD",
+        "phone" : "0388996219",
+        "special" : "Filter"
+    },
+    {
+        "name" : "Industry Beans",
+        "rating" : 4.4,
+        "location" : "3/62 Rose Street",
+        "suburb" : "Fitzroy",
+        "phone" : "0394171034",
+        "special" : "Cold Brew"
+    },
+    {
+        "name" : "St Ali Coffe Roasters",
+        "rating" : 4.3,
+        "location" : "12-18 Yarra Pl",
+        "suburb" : "South Melbourne",
+        "phone" : "0396862990",
+         "special" : "All"
+    },
+    {
+        "name" : "Market Lane Coffee",
+        "rating" : 4.5,
+        "location" : "8 Collins Street",
+        "suburb" : "CBD",
+        "phone" : "0398047434",
+        "special" : "Cold Brew"
+    },
+    {
+        "name" : "Manchester Press",
+        "rating" : 4.1,
+        "location" : "8 Rankins Lane",
+        "suburb" : "CBD",
+        "phone" : "0396004054",
+        "special" : "All"
+    }
+]
