@@ -72,7 +72,9 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title=" Specialty Cafe " largeTitleDisplayMode="always" id="1XC-yx-rAu" userLabel="Specialty Cafe"/>
+                    <navigationItem key="navigationItem" title=" Specialty Cafe " largeTitleDisplayMode="always" id="1XC-yx-rAu" userLabel="Specialty Cafe">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="eaf-gx-I5R"/>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="allCafesInMap" destination="Rbp-Rf-OTQ" id="71Q-zV-Tim"/>
