@@ -1,8 +1,7 @@
 //
 //  TableViewController.swift
-//  task-05p
+//  task-07p
 //
-//  Created by Lamphai Intathep on 12/4/19.
 //  Copyright © 2019 Lamphai Intathep. All rights reserved.
 //
 
@@ -13,25 +12,55 @@ class TableViewController: UITableViewController {
     var cafes = [Cafe]()
     var filteredCafes = [Cafe]()
     var searchController = UISearchController(searchResultsController: nil)
+    var acsSort = true
+    var ratingSort = true
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var sortByName: UIBarButtonItem!
     @IBOutlet weak var sortByRating: UIBarButtonItem!
+    @IBOutlet weak var allCafesInMap: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createFileManagerObject()
+        downloadFile()
         setupSearchController()
     }
     
     @IBAction func sortByNamePressed(_ sender: Any) {
-        cafes.sort { $0.name < $1.name}
+        if (acsSort) {
+            cafes.sort { $0.name < $1.name }
+            acsSort = false
+        } else {
+            cafes.sort { $0.name > $1.name }
+            acsSort = true
+        }
         self.tableView.reloadData()
     }
     
     @IBAction func sortByRatingPressed(_ sender: Any) {
-        cafes.sort(by: {$0.rating > $1.rating})
+        if (ratingSort) {
+            cafes.sort(by: {$0.rating > $1.rating })
+            ratingSort = false
+        } else {
+            cafes.sort(by: {$0.rating < $1.rating })
+            ratingSort = true
+        }
         self.tableView.reloadData()
+    }
+    
+    @IBAction func showAllCafesInMap(_ sender: Any) {
+        var newCafeDict: [[String: Any]] = []
+        var i = 0
+        while i <= cafes.count - 1 {
+            let cafeDict: [String: Any] = ["name": cafes[i].name,
+                                           "latitude": cafes[i].coordinate.latitude,
+                                           "longitude": cafes[i].coordinate.longitude]
+            newCafeDict.append(cafeDict)
+            i += 1
+        }
+        let vc = storyboard?.instantiateViewController(withIdentifier: "showAllMaps") as? AllMapViewController
+            vc!.cafeDict = newCafeDict
+            navigationController?.pushViewController(vc!, animated: true)
     }
     
     func setupSearchController() {
@@ -45,32 +74,32 @@ class TableViewController: UITableViewController {
         // MARK: - Add a scope buttons
         searchController.searchBar.scopeButtonTitles = ["All", "Black & White", "Filter", "Cold Brew"]
         searchController.searchBar.delegate = self
-        
         UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .darkGray
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
     }
     
     // MARK: - Download JSON
-    func createFileManagerObject() {
+    func downloadFile() {
         do {
             let path = Bundle.main.url(forResource: "cafes", withExtension: "json")
             let fm = FileManager.default
             let docurl = try fm.url(for:.documentDirectory,
                                     in: .userDomainMask, appropriateFor: nil, create: false)
 
-            let myfile = docurl.appendingPathComponent("cafes.json")
-            let filePath = myfile.path
+            let destinationFileUrl = docurl.appendingPathComponent("cafes.json")
+            try? fm.removeItem(at: destinationFileUrl)
+            let filePath = destinationFileUrl.path
             //print(docurl)
 
             if fm.fileExists(atPath: filePath) {
                 //try fm.removeItem(at: myfile)
                 print("File found")
             } else {
-                try fm.copyItem(at: path!, to: myfile)
+                try fm.copyItem(at: path!, to: destinationFileUrl)
                 print("Copy succeeded")
             }
-
+            
             let cafedata = fm.contents(atPath: filePath)
             let cafe = try JSONDecoder().decode([Cafe].self, from: cafedata!)
             self.cafes = cafe
@@ -132,11 +161,6 @@ class TableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Segue
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showSelectedCafe", sender: nil)
-    }
-    
     // MARK: - Sorting
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -151,16 +175,16 @@ class TableViewController: UITableViewController {
     }
     
     // MARK: - Segue
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let vc = segue.destination as! ScoreViewController
-//        vc.totalScore = score
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "showSelectedCafe") as? CafeDetailsViewController
+        if isFiltering() {
+            vc!.selectedCafe = filteredCafes[indexPath.row]
+            navigationController?.pushViewController(vc!, animated: true)
+        } else {
+            vc!.selectedCafe = cafes[indexPath.row]
+            navigationController?.pushViewController(vc!, animated: true)
+        }
+    }
 }
 
 extension TableViewController: UISearchResultsUpdating {

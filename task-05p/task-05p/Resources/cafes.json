@@ -5,7 +5,11 @@
         "location" : "10A Claremont Avenue",
         "suburb" : "Malvern",
         "phone" : "0395090789",
-        "special" : "Black & White"
+        "special" : "Black & White",
+        "coordinate" : {
+            "longitude" : 145.0301577,
+            "latitude" :  -37.8659054
+        }
     },
     {
         "name" : "Higher Ground",
@@ -13,7 +17,11 @@
         "location" : "650 Little Bourke Street",
         "suburb" : "CBD",
         "phone" : "0388996219",
-        "special" : "Filter"
+        "special" : "Filter",
+        "coordinate" : {
+            "longitude" : 144.9508556,
+            "latitude" :  -37.8159054
+        }
     },
     {
         "name" : "Industry Beans",
@@ -21,7 +29,11 @@
         "location" : "3/62 Rose Street",
         "suburb" : "Fitzroy",
         "phone" : "0394171034",
-        "special" : "Cold Brew"
+        "special" : "Cold Brew",
+        "coordinate" : {
+            "longitude" : 144.9355347,
+            "latitude" :  -37.815866
+        }
     },
     {
         "name" : "St Ali Coffe Roasters",
@@ -29,7 +41,11 @@
         "location" : "12-18 Yarra Pl",
         "suburb" : "South Melbourne",
         "phone" : "0396862990",
-         "special" : "All"
+         "special" : "All",
+         "coordinate" : {
+             "longitude" : 144.9581653,
+             "latitude" :  -37.8312432
+         }
     },
     {
         "name" : "Market Lane Coffee",
@@ -37,7 +53,11 @@
         "location" : "8 Collins Street",
         "suburb" : "CBD",
         "phone" : "0398047434",
-        "special" : "Cold Brew"
+        "special" : "Cold Brew",
+        "coordinate" : {
+            "longitude" : 144.9428444,
+            "latitude" :  -37.8312038
+        }
     },
     {
         "name" : "Manchester Press",
@@ -45,6 +65,10 @@
         "location" : "8 Rankins Lane",
         "suburb" : "CBD",
         "phone" : "0396004054",
-        "special" : "All"
+        "special" : "All",
+        "coordinate" : {
+            "longitude" : 144.9599369,
+            "latitude" :  -37.8138723
+        }
     }
 ]

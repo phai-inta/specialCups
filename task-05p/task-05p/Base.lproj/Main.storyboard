@@ -27,16 +27,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yfj-fv-OJ8">
-                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="16" y="-3" width="39" height="27"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="KohinoorDevanagari-Semibold" family="Kohinoor Devanagari" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tJR-M5-MEk">
-                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="16" y="24" width="60.5" height="24"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -44,28 +44,38 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <nil key="sectionIndexColor"/>
+                        </variation>
                         <connections>
                             <outlet property="dataSource" destination="6Mw-Dw-rwi" id="o7C-mm-SSR"/>
                             <outlet property="delegate" destination="6Mw-Dw-rwi" id="LaH-iZ-blv"/>
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="By Rating" width="190" id="O3U-qU-x6D">
+                        <barButtonItem title="Map" image="map" landscapeImage="map" largeContentSizeImage="map" width="122" id="Rbp-Rf-OTQ">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="showAllCafesInMap:" destination="6Mw-Dw-rwi" id="hq7-gr-SMq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Sort by rating" image="rating" landscapeImage="rating" largeContentSizeImage="rating" width="189" id="O3U-qU-x6D">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="sortByRatingPressed:" destination="6Mw-Dw-rwi" id="NCB-bp-FE8"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="By name" width="272.5" id="vBh-0A-bhu">
+                        <barButtonItem title="Sort by Name" image="sort" landscapeImage="sort" largeContentSizeImage="sort" width="272.5" id="vBh-0A-bhu">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="sortByNamePressed:" destination="6Mw-Dw-rwi" id="cg4-CX-2Zk"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title=" Specialty Cafe " largeTitleDisplayMode="always" id="1XC-yx-rAu">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="czg-Cm-6Se"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title=" Specialty Cafe " largeTitleDisplayMode="always" id="1XC-yx-rAu" userLabel="Specialty Cafe"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="allCafesInMap" destination="Rbp-Rf-OTQ" id="71Q-zV-Tim"/>
                         <outlet property="searchDisplayController" destination="TjZ-Us-KYB" id="pGa-cW-6E4"/>
                         <outlet property="sortByName" destination="vBh-0A-bhu" id="7Em-ZP-Dvn"/>
                         <outlet property="sortByRating" destination="O3U-qU-x6D" id="Ve3-VY-cNa"/>
@@ -85,94 +95,128 @@
             </objects>
             <point key="canvasLocation" x="68" y="-27"/>
         </scene>
+        <!--All Map View Controller-->
+        <scene sceneID="KqY-KG-50x">
+            <objects>
+                <viewController storyboardIdentifier="showAllMaps" id="4yO-gV-Qfa" customClass="AllMapViewController" customModule="task_05p" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tjt-sp-hMg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bUV-3S-uMt">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bUV-3S-uMt" firstAttribute="trailing" secondItem="EP5-SB-upi" secondAttribute="trailing" id="95u-Ax-I7t"/>
+                            <constraint firstItem="bUV-3S-uMt" firstAttribute="top" secondItem="Tjt-sp-hMg" secondAttribute="top" id="Xa6-sq-VvJ"/>
+                            <constraint firstItem="bUV-3S-uMt" firstAttribute="leading" secondItem="EP5-SB-upi" secondAttribute="leading" id="rUF-ep-cFe"/>
+                            <constraint firstItem="bUV-3S-uMt" firstAttribute="bottom" secondItem="EP5-SB-upi" secondAttribute="bottom" id="sGJ-f5-hBt"/>
+                            <constraint firstItem="bUV-3S-uMt" firstAttribute="bottom" secondItem="EP5-SB-upi" secondAttribute="bottom" id="yZd-dB-PU7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EP5-SB-upi"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="bUV-3S-uMt" id="mNI-Kl-jbz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PUD-ea-h8p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="92" y="742.5787106446777"/>
+        </scene>
         <!--Cafe Info-->
         <scene sceneID="vrM-ci-qlZ">
             <objects>
-                <viewController title="Cafe Info" id="XoI-uN-5TJ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="showSelectedCafe" title="Cafe Info" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XoI-uN-5TJ" customClass="CafeDetailsViewController" customModule="task_05p" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WTb-4d-Mq1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cafe name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZB-gV-Mz7">
-                                <rect key="frame" x="146" y="116" width="83" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cafe name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZB-gV-Mz7">
+                                <rect key="frame" x="0.0" y="116" width="375" height="62"/>
+                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration" identifier="cafeName"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="AWT-8Z-Zqi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KohinoorDevanagari-Semibold" family="Kohinoor Devanagari" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Info" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Mi-YF-DNY">
-                                <rect key="frame" x="85" y="163" width="224" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <accessibility key="accessibilityConfiguration" identifier="cafeInfo"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cafe details" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbm-hG-Fyk">
+                                <rect key="frame" x="25" y="186" width="325" height="350"/>
+                                <accessibility key="accessibilityConfiguration" identifier="cafeName"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="bsb-zI-hpZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KohinoorDevanagari-Regular" family="Kohinoor Devanagari" pointSize="17"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="uKR-3E-2Ou"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JZ3-2t-xO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="855" y="-26"/>
-        </scene>
-        <!--Sort cafes-->
-        <scene sceneID="EPM-rS-5PI">
-            <objects>
-                <viewController title="Sort cafes" id="F3c-qP-hYi" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ed4-pg-LbP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pd-eu-9BG">
-                                <rect key="frame" x="123" y="272" width="157" height="71"/>
-                                <color key="backgroundColor" red="0.68552795290000001" green="0.71449204749999995" blue="0.79635945429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="157" id="MMa-eV-A9F"/>
-                                    <constraint firstAttribute="height" constant="71" id="v5w-6e-gHT"/>
-                                </constraints>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" title="By name">
-                                    <color key="titleColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="sortByRatingBtn:" destination="xM0-87-lep" eventType="touchUpInside" id="KAu-oR-ahO"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9o6-qe-Y6M">
-                                <rect key="frame" x="123" y="178" width="157" height="71"/>
-                                <color key="backgroundColor" red="0.68552795290000001" green="0.71449204749999995" blue="0.79635945429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="157" id="75I-tn-Xpu"/>
-                                    <constraint firstAttribute="height" constant="71" id="qrK-6Z-taf"/>
-                                </constraints>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" title="By rating">
-                                    <color key="titleColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="sortByNameBtn:" destination="xM0-87-lep" eventType="touchUpInside" id="rIT-a1-vCj"/>
-                                </connections>
-                            </button>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5pd-eu-9BG" firstAttribute="leading" secondItem="Mlv-nm-gjp" secondAttribute="leading" constant="123" id="CeS-u0-TQV"/>
-                            <constraint firstItem="Mlv-nm-gjp" firstAttribute="trailing" secondItem="5pd-eu-9BG" secondAttribute="trailing" constant="95" id="RWq-Le-cUv"/>
-                            <constraint firstItem="5pd-eu-9BG" firstAttribute="top" secondItem="9o6-qe-Y6M" secondAttribute="bottom" constant="23" id="YnU-RC-9Av"/>
-                            <constraint firstItem="9o6-qe-Y6M" firstAttribute="leading" secondItem="Mlv-nm-gjp" secondAttribute="leading" constant="123" id="fMq-gA-KfV"/>
-                            <constraint firstItem="9o6-qe-Y6M" firstAttribute="top" secondItem="Mlv-nm-gjp" secondAttribute="top" constant="158" id="q79-YG-b0Q"/>
-                            <constraint firstItem="Mlv-nm-gjp" firstAttribute="trailing" secondItem="9o6-qe-Y6M" secondAttribute="trailing" constant="95" id="qce-jy-6dv"/>
+                            <constraint firstItem="uKR-3E-2Ou" firstAttribute="trailing" secondItem="bbm-hG-Fyk" secondAttribute="trailing" constant="25" id="Afx-46-KcU"/>
+                            <constraint firstItem="XZB-gV-Mz7" firstAttribute="trailing" secondItem="uKR-3E-2Ou" secondAttribute="trailing" id="B1V-QF-eQv"/>
+                            <constraint firstItem="XZB-gV-Mz7" firstAttribute="top" secondItem="uKR-3E-2Ou" secondAttribute="top" id="CBZ-QN-DKk"/>
+                            <constraint firstItem="bbm-hG-Fyk" firstAttribute="top" secondItem="XZB-gV-Mz7" secondAttribute="bottom" constant="8" id="MJ4-Vu-HTD"/>
+                            <constraint firstItem="bbm-hG-Fyk" firstAttribute="leading" secondItem="uKR-3E-2Ou" secondAttribute="leading" constant="25" id="bfb-aX-iao"/>
+                            <constraint firstItem="XZB-gV-Mz7" firstAttribute="leading" secondItem="uKR-3E-2Ou" secondAttribute="leading" id="hfx-Xg-7mE"/>
+                            <constraint firstItem="bbm-hG-Fyk" firstAttribute="top" secondItem="XZB-gV-Mz7" secondAttribute="bottom" constant="8" id="obo-Xi-yKM"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Mlv-nm-gjp"/>
+                        <viewLayoutGuide key="safeArea" id="uKR-3E-2Ou"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Favourite" image="heart" landscapeImage="heart" largeContentSizeImage="heart" width="190" id="z9K-Ws-lmd">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem title="address" image="address" landscapeImage="address" largeContentSizeImage="address" width="341" id="uVy-Qg-x4c">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="showSelectedCafe:" destination="XoI-uN-5TJ" id="Lwo-UZ-TNy"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cafeDetailsLabel" destination="bbm-hG-Fyk" id="d6S-r9-W1h"/>
+                        <outlet property="cafeNameLabel" destination="XZB-gV-Mz7" id="hZV-bP-5Ur"/>
+                        <outlet property="showMapBtn" destination="uVy-Qg-x4c" id="jEq-JD-2C1"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hxX-7d-USw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="xM0-87-lep" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JZ3-2t-xO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1564" y="22"/>
+            <point key="canvasLocation" x="853.60000000000002" y="-26.53673163418291"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="cKp-vk-2AC">
+            <objects>
+                <viewController storyboardIdentifier="displayMap" id="0JI-fI-07Q" customClass="MapViewController" customModule="task_05p" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="m74-FL-wZV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Pky-4s-9aU">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Pky-4s-9aU" firstAttribute="top" secondItem="m74-FL-wZV" secondAttribute="top" id="Dbo-i0-FZE"/>
+                            <constraint firstItem="Pky-4s-9aU" firstAttribute="bottom" secondItem="70K-Iu-krK" secondAttribute="bottom" id="cjn-oV-mdD"/>
+                            <constraint firstItem="Pky-4s-9aU" firstAttribute="leading" secondItem="70K-Iu-krK" secondAttribute="leading" id="deE-d2-G3q"/>
+                            <constraint firstItem="Pky-4s-9aU" firstAttribute="trailing" secondItem="70K-Iu-krK" secondAttribute="trailing" id="skV-g0-mCB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="70K-Iu-krK"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="Pky-4s-9aU" id="9wE-Vm-xeI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9qq-qL-u8z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853.60000000000002" y="743.47826086956525"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="egf-jn-IQE">
@@ -199,4 +243,11 @@
             <point key="canvasLocation" x="-673" y="-25"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="address" width="37.5" height="37.5"/>
+        <image name="heart" width="37.5" height="37.5"/>
+        <image name="map" width="30" height="30"/>
+        <image name="rating" width="30" height="30"/>
+        <image name="sort" width="30" height="30"/>
+    </resources>
 </document>
