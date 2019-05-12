@@ -16,28 +16,32 @@ class Cafe : NSObject, Codable {
     let suburb : String
     let phone : String
     let special : String
-    let coordinate : Coordinate
+    let latitude: Double
+    let longitude: Double
+    var isFavourite : Bool
     
-    init(name:String, rating:Double, location:String, suburb:String, phone:String, special:String, coordinate: Coordinate) {
+    init(name:String, rating:Double, location:String, suburb:String, phone:String, special:String, latitude: Double, longitude: Double, isFavourite:Bool) {
         self.name = name
         self.rating = rating
         self.location = location
         self.suburb = suburb
         self.phone = phone
         self.special = special
-        self.coordinate = coordinate
-        super.init()
-    }
-}
-
-class Coordinate: NSObject, Codable {
-    let longitude: Double
-    let latitude: Double
-
-    init( longitude: Double, latitude: Double) {
-        self.longitude = longitude
         self.latitude = latitude
+        self.longitude = longitude
+        self.isFavourite = isFavourite
         super.init()
-        
     }
 }
+
+//class Coordinate: NSObject, Codable {
+//    let longitude: Double
+//    let latitude: Double
+//
+//    init( longitude: Double, latitude: Double) {
+//        self.longitude = longitude
+//        self.latitude = latitude
+//        super.init()
+//        
+//    }
+//}

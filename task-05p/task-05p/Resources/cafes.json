@@ -6,10 +6,9 @@
         "suburb" : "Malvern",
         "phone" : "0395090789",
         "special" : "Black & White",
-        "coordinate" : {
-            "longitude" : 145.0301577,
-            "latitude" :  -37.8659054
-        }
+        "isFavourite" : false,
+        "longitude" : 145.0301577,
+        "latitude" :  -37.8659054
     },
     {
         "name" : "Higher Ground",
@@ -18,10 +17,9 @@
         "suburb" : "CBD",
         "phone" : "0388996219",
         "special" : "Filter",
-        "coordinate" : {
-            "longitude" : 144.9508556,
-            "latitude" :  -37.8159054
-        }
+        "isFavourite" : false,
+        "longitude" : 144.9508556,
+        "latitude" :  -37.8159054
     },
     {
         "name" : "Industry Beans",
@@ -30,10 +28,9 @@
         "suburb" : "Fitzroy",
         "phone" : "0394171034",
         "special" : "Cold Brew",
-        "coordinate" : {
-            "longitude" : 144.9355347,
-            "latitude" :  -37.815866
-        }
+        "isFavourite" : false,
+        "longitude" : 144.9355347,
+        "latitude" :  -37.815866
     },
     {
         "name" : "St Ali Coffe Roasters",
@@ -41,11 +38,10 @@
         "location" : "12-18 Yarra Pl",
         "suburb" : "South Melbourne",
         "phone" : "0396862990",
-         "special" : "All",
-         "coordinate" : {
-             "longitude" : 144.9581653,
-             "latitude" :  -37.8312432
-         }
+        "special" : "All",
+        "isFavourite" : false,
+        "longitude" : 144.9581653,
+        "latitude" :  -37.8312432
     },
     {
         "name" : "Market Lane Coffee",
@@ -54,10 +50,9 @@
         "suburb" : "CBD",
         "phone" : "0398047434",
         "special" : "Cold Brew",
-        "coordinate" : {
-            "longitude" : 144.9428444,
-            "latitude" :  -37.8312038
-        }
+        "isFavourite" : false,
+        "longitude" : 144.9428444,
+        "latitude" :  -37.8312038
     },
     {
         "name" : "Manchester Press",
@@ -66,9 +61,8 @@
         "suburb" : "CBD",
         "phone" : "0396004054",
         "special" : "All",
-        "coordinate" : {
-            "longitude" : 144.9599369,
-            "latitude" :  -37.8138723
-        }
+        "isFavourite" : false,
+        "longitude" : 144.9599369,
+        "latitude" :  -37.8138723
     }
 ]

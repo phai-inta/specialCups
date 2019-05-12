@@ -1,9 +1,7 @@
-//
 //  TableViewController.swift
-//  task-07p
-//
+//  D task
 //  Copyright © 2019 Lamphai Intathep. All rights reserved.
-//
+
 
 import UIKit
 
@@ -19,11 +17,55 @@ class TableViewController: UITableViewController {
     @IBOutlet weak var sortByName: UIBarButtonItem!
     @IBOutlet weak var sortByRating: UIBarButtonItem!
     @IBOutlet weak var allCafesInMap: UIBarButtonItem!
+    @IBOutlet weak var favouriteBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         downloadFile()
         setupSearchController()
+        tableView.register(CafeCell.self, forCellReuseIdentifier: "cell")
+    }
+    
+    // MARK: - Download JSON
+    func downloadFile() {
+        do {
+            let path = Bundle.main.url(forResource: "cafes", withExtension: "json")
+            let fm = FileManager.default
+            let docurl = try fm.url(for:.documentDirectory,
+                                    in: .userDomainMask, appropriateFor: nil, create: false)
+            let destinationFileUrl = docurl.appendingPathComponent("cafes.json")
+            //try? fm.removeItem(at: destinationFileUrl)
+            let filePath = destinationFileUrl.path
+            //print(docurl)
+            
+            if fm.fileExists(atPath: filePath) {
+                print("File found")
+            } else {
+                try fm.copyItem(at: path!, to: destinationFileUrl)
+                print("Copy succeeded")
+            }
+            
+            let cafedata = fm.contents(atPath: filePath)
+            let cafe = try JSONDecoder().decode([Cafe].self, from: cafedata!)
+            self.cafes = cafe
+        } catch {
+            print("Downloading error")
+        }
+    }
+    
+    func setupSearchController() {
+        // MARK: - Add a search tab
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search cafe"
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        
+        // MARK: - Add a scope buttons
+        searchController.searchBar.scopeButtonTitles = ["All", "Black & White", "Filter", "Cold Brew"]
+        searchController.searchBar.delegate = self
+        UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .darkGray
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
     }
     
     @IBAction func sortByNamePressed(_ sender: Any) {
@@ -48,13 +90,20 @@ class TableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    //MARK: - navigate to favourite list
+    @IBAction func showFavourite(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "showFavourite") as? FavouriteTableViewController
+        navigationController?.pushViewController(vc!, animated: true)
+    }
+    
+    //MARK: - Navigate to map
     @IBAction func showAllCafesInMap(_ sender: Any) {
         var newCafeDict: [[String: Any]] = []
         var i = 0
         while i <= cafes.count - 1 {
             let cafeDict: [String: Any] = ["name": cafes[i].name,
-                                           "latitude": cafes[i].coordinate.latitude,
-                                           "longitude": cafes[i].coordinate.longitude]
+                                           "latitude": cafes[i].latitude,
+                                           "longitude": cafes[i].longitude]
             newCafeDict.append(cafeDict)
             i += 1
         }
@@ -63,57 +112,10 @@ class TableViewController: UITableViewController {
             navigationController?.pushViewController(vc!, animated: true)
     }
     
-    func setupSearchController() {
-        
-        // MARK: - Add a search tab
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search cafe"
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.sizeToFit()
-        
-        // MARK: - Add a scope buttons
-        searchController.searchBar.scopeButtonTitles = ["All", "Black & White", "Filter", "Cold Brew"]
-        searchController.searchBar.delegate = self
-        UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .darkGray
-        definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
-    }
-    
-    // MARK: - Download JSON
-    func downloadFile() {
-        do {
-            let path = Bundle.main.url(forResource: "cafes", withExtension: "json")
-            let fm = FileManager.default
-            let docurl = try fm.url(for:.documentDirectory,
-                                    in: .userDomainMask, appropriateFor: nil, create: false)
-
-            let destinationFileUrl = docurl.appendingPathComponent("cafes.json")
-            try? fm.removeItem(at: destinationFileUrl)
-            let filePath = destinationFileUrl.path
-            //print(docurl)
-
-            if fm.fileExists(atPath: filePath) {
-                //try fm.removeItem(at: myfile)
-                print("File found")
-            } else {
-                try fm.copyItem(at: path!, to: destinationFileUrl)
-                print("Copy succeeded")
-            }
-            
-            let cafedata = fm.contents(atPath: filePath)
-            let cafe = try JSONDecoder().decode([Cafe].self, from: cafedata!)
-            self.cafes = cafe
-            //print(filePath)
-        } catch {
-            print("Downloading error")
-        }
-    }
-    
     // MARK: - Filter by searching in search textfield or scope buttons
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredCafes = cafes.filter({( cafe : Cafe ) -> Bool in
             let doesCategoryMatch = (scope == "All" || (cafe.special == scope))
-            
             if searchController.searchBar.text == "" {
                 return doesCategoryMatch
             } else {
@@ -145,22 +147,44 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CafeCell
+        cell.link = self
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
         if isFiltering() {
             cell.textLabel?.text = filteredCafes[indexPath.row].name
             cell.detailTextLabel?.numberOfLines = 0
             cell.detailTextLabel?.text = "Rating: " + String(filteredCafes[indexPath.row].rating)
+            cell.accessoryView?.tintColor = filteredCafes[indexPath.row].isFavourite ? UIColor.blue : .lightGray
             return cell
         } else {
             cell.textLabel?.text = cafes[indexPath.row].name
             cell.detailTextLabel?.numberOfLines = 0
             cell.detailTextLabel?.text = "Rating: " + String(cafes[indexPath.row].rating)
+            cell.accessoryView?.tintColor = cafes[indexPath.row].isFavourite ? UIColor.blue : .lightGray
             return cell
         }
     }
     
+    @IBAction func addButtonClicked(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "addNewCafe") as? AddCafeTableViewController
+        vc!.cafeList = cafes
+        navigationController?.pushViewController(vc!, animated: true)
+        
+//        var newCafeDict: [[String: Any]] = []
+//        var i = 0
+//        while i <= cafes.count - 1 {
+//            let cafeDict: [String: Any] = ["name": cafes[i].name,
+//                                           "latitude": cafes[i].coordinate.latitude,
+//                                           "longitude": cafes[i].coordinate.longitude]
+//            newCafeDict.append(cafeDict)
+//            i += 1
+//        }
+//        let vc = storyboard?.instantiateViewController(withIdentifier: "showAllMaps") as? AllMapViewController
+//        vc!.cafeDict = newCafeDict
+//        navigationController?.pushViewController(vc!, animated: true)
+        
+        
+    }
     // MARK: - Sorting
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -174,7 +198,7 @@ class TableViewController: UITableViewController {
         self.lastContentOffset = scrollView.contentOffset.y
     }
     
-    // MARK: - Segue
+    // MARK: - Segue to selected cafe page
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "showSelectedCafe") as? CafeDetailsViewController
         if isFiltering() {
@@ -184,6 +208,33 @@ class TableViewController: UITableViewController {
             vc!.selectedCafe = cafes[indexPath.row]
             navigationController?.pushViewController(vc!, animated: true)
         }
+    }
+    
+    // MARK: Favourite button tapped
+    func isFavouritePressed(cell: UITableViewCell) {
+        let indexPathClicked = tableView.indexPath(for: cell)
+        let hasFavourite = cafes[indexPathClicked!.row].isFavourite
+        cafes[indexPathClicked!.row].isFavourite = !hasFavourite
+        let updateFavourite = cafes[indexPathClicked!.row].isFavourite
+        cell.accessoryView?.tintColor = updateFavourite ? UIColor.blue : .lightGray
+
+        //MARK: Save changes to file
+        do {
+            let fm = FileManager.default
+            let docurl = try fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let cafeUrl = docurl.appendingPathComponent("cafes.json")
+            try fm.removeItem(at: cafeUrl)
+            let jsonData = try! JSONEncoder().encode(cafes)
+            try jsonData.write(to: cafeUrl, options: .atomic)
+        } catch {
+            print("Cannot save favourite item to file")
+        }
+    }
+
+    @IBAction func isFavouriteBtnClicked(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "showFavourite") as? FavouriteTableViewController
+        vc!.favList = cafes
+        navigationController?.pushViewController(vc!, animated: true)
     }
 }
 
