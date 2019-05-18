@@ -18,7 +18,8 @@
 		D32E4D7D225A0C46006FC625 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D32E4D7B225A0C46006FC625 /* LaunchScreen.storyboard */; };
 		D32E4D88225A0C46006FC625 /* task_05pTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E4D87225A0C46006FC625 /* task_05pTests.swift */; };
 		D32E4D93225A0C47006FC625 /* task_05pUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E4D92225A0C47006FC625 /* task_05pUITests.swift */; };
-		D36318A8228597C000E3AF75 /* AddCafeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36318A7228597C000E3AF75 /* AddCafeTableViewController.swift */; };
+		D343ACDD22882D2100AB8F26 /* OnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343ACDC22882D2100AB8F26 /* OnlineViewController.swift */; };
+		D36318A8228597C000E3AF75 /* MoreCafesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36318A7228597C000E3AF75 /* MoreCafesTableViewController.swift */; };
 		D36318AC2285A10F00E3AF75 /* OnlineCafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36318AB2285A10F00E3AF75 /* OnlineCafe.swift */; };
 		D36318B02287A8BF00E3AF75 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36318AF2287A8BF00E3AF75 /* SwiftyJSON.framework */; };
 		D3940308227EDFB50044AF3E /* FavouriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3940307227EDFB50044AF3E /* FavouriteTableViewController.swift */; };
@@ -70,7 +71,8 @@
 		D32E4D8E225A0C47006FC625 /* task-05pUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "task-05pUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D32E4D92225A0C47006FC625 /* task_05pUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = task_05pUITests.swift; sourceTree = "<group>"; };
 		D32E4D94225A0C47006FC625 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D36318A7228597C000E3AF75 /* AddCafeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeTableViewController.swift; sourceTree = "<group>"; };
+		D343ACDC22882D2100AB8F26 /* OnlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineViewController.swift; sourceTree = "<group>"; };
+		D36318A7228597C000E3AF75 /* MoreCafesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCafesTableViewController.swift; sourceTree = "<group>"; };
 		D36318AB2285A10F00E3AF75 /* OnlineCafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineCafe.swift; sourceTree = "<group>"; };
 		D36318AD2285BFE400E3AF75 /* Alamofire */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Alamofire; path = Pods/Alamofire; sourceTree = "<group>"; };
 		D36318AF2287A8BF00E3AF75 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,8 +217,9 @@
 				D30200F1226099B800396736 /* TableViewController.swift */,
 				D3940309227F024B0044AF3E /* CafeCell.swift */,
 				D3FFD4282275CD3600116287 /* CafeDetailsViewController.swift */,
-				D36318A7228597C000E3AF75 /* AddCafeTableViewController.swift */,
+				D36318A7228597C000E3AF75 /* MoreCafesTableViewController.swift */,
 				D3940307227EDFB50044AF3E /* FavouriteTableViewController.swift */,
+				D343ACDC22882D2100AB8F26 /* OnlineViewController.swift */,
 			);
 			path = CafePagesControllers;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-task-05p/Pods-task-05p-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -389,6 +393,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -470,10 +475,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D36318A8228597C000E3AF75 /* AddCafeTableViewController.swift in Sources */,
+				D36318A8228597C000E3AF75 /* MoreCafesTableViewController.swift in Sources */,
 				D394030A227F024B0044AF3E /* CafeCell.swift in Sources */,
 				D3E0D502227DAFBA00F556D6 /* AllMapViewController.swift in Sources */,
 				D30200EE226092B400396736 /* Cafe.swift in Sources */,
+				D343ACDD22882D2100AB8F26 /* OnlineViewController.swift in Sources */,
 				D3940308227EDFB50044AF3E /* FavouriteTableViewController.swift in Sources */,
 				D3FFD42B2275D88C00116287 /* MapViewController.swift in Sources */,
 				D3FFD4292275CD3600116287 /* CafeDetailsViewController.swift in Sources */,

@@ -2,20 +2,16 @@
 //  D task
 //  Copyright © 2019 Lamphai Intathep. All rights reserved.
 
-
 import UIKit
 
 class TableViewController: UITableViewController {
-    
     var cafes = [Cafe]()
     var filteredCafes = [Cafe]()
     var searchController = UISearchController(searchResultsController: nil)
     var acsSort = true
     var ratingSort = true
     
-    @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var sortByName: UIBarButtonItem!
-    @IBOutlet weak var sortByRating: UIBarButtonItem!
     @IBOutlet weak var allCafesInMap: UIBarButtonItem!
     @IBOutlet weak var favouriteBtn: UIBarButtonItem!
     
@@ -61,31 +57,20 @@ class TableViewController: UITableViewController {
         searchController.searchBar.sizeToFit()
         
         // MARK: - Add a scope buttons
-        searchController.searchBar.scopeButtonTitles = ["All", "Black & White", "Filter", "Cold Brew"]
+        searchController.searchBar.scopeButtonTitles = ["All", "CBD"]
         searchController.searchBar.delegate = self
         UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .darkGray
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
     }
     
-    @IBAction func sortByNamePressed(_ sender: Any) {
+    @IBAction func sortByNameTapped(_ sender: Any) {
         if (acsSort) {
             cafes.sort { $0.name < $1.name }
             acsSort = false
         } else {
             cafes.sort { $0.name > $1.name }
             acsSort = true
-        }
-        self.tableView.reloadData()
-    }
-    
-    @IBAction func sortByRatingPressed(_ sender: Any) {
-        if (ratingSort) {
-            cafes.sort(by: {$0.rating > $1.rating })
-            ratingSort = false
-        } else {
-            cafes.sort(by: {$0.rating < $1.rating })
-            ratingSort = true
         }
         self.tableView.reloadData()
     }
@@ -101,9 +86,7 @@ class TableViewController: UITableViewController {
         var newCafeDict: [[String: Any]] = []
         var i = 0
         while i <= cafes.count - 1 {
-            let cafeDict: [String: Any] = ["name": cafes[i].name,
-                                           "latitude": cafes[i].latitude,
-                                           "longitude": cafes[i].longitude]
+            let cafeDict: [String: Any] = ["name": cafes[i].name, "latitude": cafes[i].latitude, "longitude": cafes[i].longitude, "location": cafes[i].location]
             newCafeDict.append(cafeDict)
             i += 1
         }
@@ -115,11 +98,11 @@ class TableViewController: UITableViewController {
     // MARK: - Filter by searching in search textfield or scope buttons
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredCafes = cafes.filter({( cafe : Cafe ) -> Bool in
-            let doesCategoryMatch = (scope == "All" || (cafe.special == scope))
+            let doesCategoryMatch = (scope == "All" || cafe.suburb == scope)
             if searchController.searchBar.text == "" {
                 return doesCategoryMatch
             } else {
-                return doesCategoryMatch && cafe.name.lowercased().contains(searchText.lowercased())
+                return (doesCategoryMatch && cafe.name.lowercased().contains(searchText.lowercased())) || (doesCategoryMatch && String(cafe.rating).contains(searchText))
             }
         })
         tableView.reloadData()
@@ -165,25 +148,11 @@ class TableViewController: UITableViewController {
         }
     }
     
-    @IBAction func addButtonClicked(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "addNewCafe") as? AddCafeTableViewController
-        vc!.cafeList = cafes
+    //MARK: View more cafes
+    @IBAction func viewMoreOnlineCafes(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "onlineCafes") as? MoreCafesTableViewController
+        vc?.delegate = self
         navigationController?.pushViewController(vc!, animated: true)
-        
-//        var newCafeDict: [[String: Any]] = []
-//        var i = 0
-//        while i <= cafes.count - 1 {
-//            let cafeDict: [String: Any] = ["name": cafes[i].name,
-//                                           "latitude": cafes[i].coordinate.latitude,
-//                                           "longitude": cafes[i].coordinate.longitude]
-//            newCafeDict.append(cafeDict)
-//            i += 1
-//        }
-//        let vc = storyboard?.instantiateViewController(withIdentifier: "showAllMaps") as? AllMapViewController
-//        vc!.cafeDict = newCafeDict
-//        navigationController?.pushViewController(vc!, animated: true)
-        
-        
     }
     // MARK: - Sorting
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -217,8 +186,11 @@ class TableViewController: UITableViewController {
         cafes[indexPathClicked!.row].isFavourite = !hasFavourite
         let updateFavourite = cafes[indexPathClicked!.row].isFavourite
         cell.accessoryView?.tintColor = updateFavourite ? UIColor.blue : .lightGray
-
-        //MARK: Save changes to file
+        saveChangesToFile()
+    }
+    
+    //MARK: Save changes to file
+    func saveChangesToFile() {
         do {
             let fm = FileManager.default
             let docurl = try fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
@@ -251,3 +223,27 @@ extension TableViewController: UISearchBarDelegate {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
+
+extension TableViewController: UpdateCafeListDelegate {
+    func addCafeToList(toAdd: Cafe) {
+        var found: Bool = false
+        for cafe in cafes {
+            if (cafe.name == toAdd.name) {
+                found = true
+            }
+        }
+        if (!found) {
+            cafes.append(toAdd)
+            saveChangesToFile()
+            let alert = UIAlertController(title: "", message: "The cafe is added successfully." , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "The cafe is already added." , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+        tableView.reloadData()
+    }
+}
+

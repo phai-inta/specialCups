@@ -16,14 +16,10 @@ class OnlineCafe: NSObject {
     let location: String
     let suburb: String
     var phone : String
-    var special : String
     var isFavourite : Bool
+    let image: String
     
-//    enum CodingKeys: String, CodingKey {
-//        case rating = "aggregate_rating"
-//    }
-    
-    init(name: String, rating: Double, latitude: Double, longitude: Double, location: String, suburb: String, phone: String, special: String, isFavourite: Bool) {
+    init(name: String, rating: Double, latitude: Double, longitude: Double, location: String, suburb: String, phone: String, isFavourite: Bool, image: String) {
         self.name = name
         self.rating = rating
         self.latitude = latitude
@@ -31,7 +27,7 @@ class OnlineCafe: NSObject {
         self.suburb = suburb
         self.location = location
         self.phone = phone
-        self.special = special
         self.isFavourite = isFavourite
+        self.image = image
     }
 }

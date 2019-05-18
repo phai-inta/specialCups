@@ -36,7 +36,6 @@ class CafeDetailsViewController: UIViewController {
             ratingLabel.text = "Rating: " + (NSString(format: "%.1f", cafeDetails.rating) as String)
             locationLabel.text = "Location: " + cafeDetails.location + " " + cafeDetails.suburb
             phoneLabel.text = "Phone: " + cafeDetails.phone
-            offerLabel.text = "Special cups: " + cafeDetails.special
         }
     }
     

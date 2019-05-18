@@ -5,7 +5,6 @@
         "location" : "10A Claremont Avenue",
         "suburb" : "Malvern",
         "phone" : "0395090789",
-        "special" : "Black & White",
         "isFavourite" : false,
         "longitude" : 145.0301577,
         "latitude" :  -37.8659054
@@ -16,7 +15,6 @@
         "location" : "650 Little Bourke Street",
         "suburb" : "CBD",
         "phone" : "0388996219",
-        "special" : "Filter",
         "isFavourite" : false,
         "longitude" : 144.9508556,
         "latitude" :  -37.8159054
@@ -27,7 +25,6 @@
         "location" : "3/62 Rose Street",
         "suburb" : "Fitzroy",
         "phone" : "0394171034",
-        "special" : "Cold Brew",
         "isFavourite" : false,
         "longitude" : 144.9355347,
         "latitude" :  -37.815866
@@ -38,7 +35,6 @@
         "location" : "12-18 Yarra Pl",
         "suburb" : "South Melbourne",
         "phone" : "0396862990",
-        "special" : "All",
         "isFavourite" : false,
         "longitude" : 144.9581653,
         "latitude" :  -37.8312432
@@ -49,7 +45,6 @@
         "location" : "8 Collins Street",
         "suburb" : "CBD",
         "phone" : "0398047434",
-        "special" : "Cold Brew",
         "isFavourite" : false,
         "longitude" : 144.9428444,
         "latitude" :  -37.8312038
@@ -60,7 +55,6 @@
         "location" : "8 Rankins Lane",
         "suburb" : "CBD",
         "phone" : "0396004054",
-        "special" : "All",
         "isFavourite" : false,
         "longitude" : 144.9599369,
         "latitude" :  -37.8138723
