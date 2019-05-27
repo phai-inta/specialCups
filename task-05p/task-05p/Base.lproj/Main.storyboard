@@ -77,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="990" y="-724"/>
         </scene>
-        <!-- Specialty Cups-->
+        <!--Specialty Cups-->
         <scene sceneID="6Ol-jN-prq">
             <objects>
-                <tableViewController storyboardIdentifier="homepage" id="6Mw-Dw-rwi" customClass="TableViewController" customModule="task_05p" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="homepage" id="6Mw-Dw-rwi" userLabel="Specialty Cups" customClass="TableViewController" customModule="task_05p" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4a5-eI-Z5T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,7 +139,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title=" Specialty Cups" largeTitleDisplayMode="always" id="1XC-yx-rAu" userLabel="Specialty Cafe">
+                    <navigationItem key="navigationItem" title=" Special Cups" largeTitleDisplayMode="always" id="1XC-yx-rAu" userLabel="Specialty Cafe">
                         <barButtonItem key="backBarButtonItem" title="Back" id="eaf-gx-I5R"/>
                         <barButtonItem key="rightBarButtonItem" title="sortByName" image="sort" largeContentSizeImage="sort" style="done" id="vp7-LP-GE6">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -210,7 +210,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cafe name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZB-gV-Mz7">
-                                <rect key="frame" x="0.0" y="20" width="375" height="62"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="62"/>
                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration" identifier="cafeName"/>
                                 <constraints>
@@ -221,7 +221,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4yk-v1-Ere">
-                                <rect key="frame" x="29" y="106" width="317" height="216"/>
+                                <rect key="frame" x="29" y="202" width="317" height="120"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" alignment="top" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VEg-Um-cSP">
                                         <rect key="frame" x="0.0" y="0.0" width="317" height="24"/>
@@ -242,7 +242,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" alignment="top" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JXr-8s-t6G">
-                                        <rect key="frame" x="0.0" y="64" width="317" height="24"/>
+                                        <rect key="frame" x="0.0" y="32" width="317" height="24"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address" translatesAutoresizingMaskIntoConstraints="NO" id="Qdn-VB-aLw">
                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -260,7 +260,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" alignment="top" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oeK-mh-hXH">
-                                        <rect key="frame" x="0.0" y="128" width="317" height="24"/>
+                                        <rect key="frame" x="0.0" y="64" width="317" height="24"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone" translatesAutoresizingMaskIntoConstraints="NO" id="ZNy-nx-FM4">
                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -278,7 +278,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" alignment="top" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CdN-AT-J7V">
-                                        <rect key="frame" x="0.0" y="192" width="317" height="24"/>
+                                        <rect key="frame" x="0.0" y="96" width="317" height="24"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coffee" translatesAutoresizingMaskIntoConstraints="NO" id="wEb-WI-EUg">
                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -578,6 +578,6 @@
         <image name="sort" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="90E-bF-XFD"/>
+        <segue reference="x9k-qm-9lS"/>
     </inferredMetricsTieBreakers>
 </document>
