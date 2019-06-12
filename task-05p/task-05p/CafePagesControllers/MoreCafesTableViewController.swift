@@ -26,6 +26,7 @@ class MoreCafesTableViewController: UITableViewController {
     var nameSort = true
     var ratingSort = true
     var delegate: UpdateCafeListDelegate?
+    var spinner: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +40,19 @@ class MoreCafesTableViewController: UITableViewController {
             "Accept" : "application/json",
             "user-key" : "8595b315ae3b79244fe14b5979454b0e"
         ]
+    
+        spinner.center = self.view.center
+        spinner.hidesWhenStopped = true
+        spinner.style = UIActivityIndicatorView.Style.gray
+        spinner.transform = CGAffineTransform(scaleX: 2, y: 2)
+        self.view.addSubview(spinner)
+        spinner.startAnimating()
         
         Alamofire.request(zomatoUrl, method: .get, parameters: ["":""], encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             if response.result.isSuccess {
                 print("API loading successful")
+                self.spinner.stopAnimating()
                 self.onlineCafeJSON = JSON(response.result.value!)
                 //print(self.onlineCafeJSON!)
                 for (_, object) in self.onlineCafeJSON!["restaurants"] {
@@ -83,7 +92,7 @@ class MoreCafesTableViewController: UITableViewController {
         let object = Cafe(name: selectedCafe.name, rating: selectedCafe.rating, location: selectedCafe.location, suburb: selectedCafe.suburb, phone: selectedCafe.phone, latitude: selectedCafe.latitude, longitude: selectedCafe.longitude, isFavourite: selectedCafe.isFavourite)
             delegate!.addCafeToList(toAdd: object)
     }
-
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -184,3 +193,4 @@ extension MoreCafesTableViewController: UISearchResultsUpdating {
         filterContentForSearchText(searchController.searchBar.text!)
     }
 }
+

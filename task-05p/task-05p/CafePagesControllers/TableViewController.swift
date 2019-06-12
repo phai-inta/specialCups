@@ -148,6 +148,33 @@ class TableViewController: UITableViewController {
         }
     }
     
+    //MARK: Delete row
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            let alert = UIAlertController(title: "Warning", message: "Are you sure?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                if self.isFiltering() {
+                    self.filteredCafes.remove(at: indexPath.row)
+                    tableView.beginUpdates()
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    tableView.endUpdates()
+                    self.saveChangesToFile()
+                } else {
+                    self.cafes.remove(at: indexPath.row)
+                    tableView.beginUpdates()
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    tableView.endUpdates()
+                    self.saveChangesToFile()
+                }
+            })
+            alert.addAction(delete)
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
     //MARK: View more cafes
     @IBAction func viewMoreOnlineCafes(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "onlineCafes") as? MoreCafesTableViewController
